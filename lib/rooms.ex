@@ -1,12 +1,11 @@
-defmodule ElixirSample.Room2 do
+defmodule ElixirSample.Rooms do
   require NITRO
   require N2O
 
-  @room "room2"
-
   def event(:init) do
-    room = @room
+    room = :n2o.session(:room)
     :n2o.reg({:topic, room})
+    :nitro.update(:heading, NITRO.h2(id: :heading, body: room))
     :nitro.update(:send, NITRO.button(id: :send, body: "Send", postback: :chat, source: [:message]))
 
   end
@@ -14,7 +13,7 @@ defmodule ElixirSample.Room2 do
   def event(:chat) do
     message = :nitro.q(:message)
     user = :n2o.user()
-    room = @room
+    room = :n2o.session(:room)
 
     :n2o.send({:topic, room}, N2O.client(data: {user, message}))
   end
@@ -29,4 +28,9 @@ defmodule ElixirSample.Room2 do
       ])
     )
   end
+
+  def event(_) do
+    :ok
+  end
+
 end

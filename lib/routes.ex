@@ -12,9 +12,6 @@ defmodule ElixirSample.Routes do
   def route_prefix(<<"/", p::binary>>), do: route(p)
   def route_prefix(p), do: route(p)
 
-  def route(<<"app/room1", _::binary>>), do: ElixirSample.Room1
-  def route(<<"app/room2", _::binary>>), do: ElixirSample.Room2
-  def route(<<"app/room3", _::binary>>), do: ElixirSample.Room3
-
+  def route(<<"app/room", _::binary>>), do: ElixirSample.Rooms
   def route(_), do: ElixirSample.Index
 end
